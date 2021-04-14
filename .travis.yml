@@ -2,7 +2,10 @@ arch:
   - amd64
   - ppc64le
 language: java
-jdk: openjdk11
-before_install:
-  - ./gradlew wrapper --gradle-version=7.0 --distribution-type=bin
-  - ./gradlew tasks
+jdk: openjdk8
+service: docker
+#before_install:
+#  - ./gradlew wrapper --gradle-version=7.0 --distribution-type=bin
+#  - ./gradlew tasks
+install:
+  - mvn -B -DuseMavenCentral -Ddocker "-Ddocker.taglatest" "-Ddocker.repo=odpi" "-Ddocker.registry=docker.io" "-Ddocker.images=core" clean deploy
